@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var socketio = require('socket.io');
 
 var routes = require('./routes/index')(io);
-var users = require('./routes/users');
+var api = require('./routes/api')(io);
 
 var app = express();
 
@@ -29,7 +29,7 @@ app.use(require('node-compass')({mode: 'expanded'}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/api', api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

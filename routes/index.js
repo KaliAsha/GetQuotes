@@ -1,4 +1,5 @@
 module.exports = function(io) {
+  var debug = require('debug')('HelloWorld:index');
   var express = require('express');
   var router = express.Router();
 
