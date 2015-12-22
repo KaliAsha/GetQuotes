@@ -9,7 +9,9 @@ module.exports = function(io) {
     res.render('api', { title: 'API' });
   });
 
-  /* SEARCH */
+  /**
+   * SEARCH
+   */
   router.get('/s', function(req, res, next) {
     res.render('api', { title: 'SEARCH' });
   });
@@ -22,7 +24,9 @@ module.exports = function(io) {
   });
 
 
-  /* GET */
+  /**
+   * GET
+   */
   router.get('/g', function(req, res, next) {
     res.render('api', { title: 'GET' });
   });
