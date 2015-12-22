@@ -49,7 +49,11 @@ module.exports = {
     var market = code.split('-')[1];
 
     if (!market) {
-      request('http://localhost:3000/api/s/' + isin, function(error, resp, body) {
+      var host = !process.env.PORT
+        ? process.env.URL
+        : process.env.URL + ':' + process.env.PORT
+      debug('HOST : ' + host);
+      request(host + '/api/s/' + isin, function(error, resp, body) {
         var result = JSON.parse(body);
         market = result[0].market;
         getQuotes(isin, market)

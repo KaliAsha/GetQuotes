@@ -31,3 +31,6 @@ npm-debug.log
 
 # Sass Cache
 public/.sass-cache
+
+# Env variables
+.env
