@@ -2,7 +2,7 @@
 
 /* Module dependencies */
 var app = require('../app');
-var debug = require('debug')('HelloWorld:server');
+var debug = require('debug')('GetQuotes:server');
 var http = require('http');
 
 /* Get port from environment and store in Express */
