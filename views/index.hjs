@@ -1,18 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
-  </head>
-  <body>
+<head>
+  <title>{{ title }}</title>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+  <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
 
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+  <div id="results">
+    <h1 id="name"></h1>
+    <h1 id="price"></h1>
+    <h2 id="var"></h2>
+    <h5 id="time"></h5>
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="/javascripts/socket.js"></script>
-  </body>
+  </div>
+
+
+  <!-- <script src="/socket.io/socket.io.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+  <!-- <script src="/javascripts/socket.js"></script> -->
+  <script type="text/javascript">
+  function getQuotes() {
+    $.ajax({
+      url: "/api/g/FR0000120354-XPAR",
+      cache: false
+    })
+    .done(function(res) {
+      var data = res
+      var vari = data.openAbs < 0 ? data.openAbs : '+' + data.openAbs;
+      $("#name").html(data.symbole + ' - ' + data.name);
+      $("#price").html(data.price + ' ' + data.currency);
+      $("#var").html(vari + ' (' + data.openRel + '%)');
+      $("#time").html(data.lastTime);
+    });
+  }
+  jQuery(document).ready(function($) {
+    getQuotes()
+    setInterval(function () {
+      getQuotes()
+    }, 20000);
+  });
+  </script>
+</body>
 </html>
