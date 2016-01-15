@@ -49,10 +49,7 @@ module.exports = {
     var market = code.split('-')[1];
 
     if (!market) {
-      var host = !process.env.PORT
-        ? process.env.URL
-        : process.env.URL + ':' + process.env.PORT
-      debug('HOST : ' + host);
+      var host = 'http://localhost:3000';
       request(host + '/api/s/' + isin, function(error, resp, body) {
         var result = JSON.parse(body);
         market = result[0].market;
@@ -73,7 +70,7 @@ module.exports = {
         symbole :      $('.first-row .first-column span').text(),
         currency :     $('#currencySymbolvalue').text().replace(/\s/g, ''),
         price :        ($('#lastPriceint').text() + $('#lastPricefract').text()).replace(/,/g, '.')*1,
-        marketStatus : $('#tradingStatusvalue').text(),
+        marketStatus : $('#tradingStatusvalue').text() == '' ? 'OPEN' : $('#tradingStatusvalue').text(),
         prevCloseAbs : $('#cnDiffAbsvalue').text().replace(/\s/g, '').replace(/,/g, '.')*1,
         prevCloseRel : $('#cnDiffRelvalue').text().replace(/\((.+?)%\)/g, '$1').replace(/,/g, '.')*1,
         openAbs :      $('#cnOpenDiffAbsvalue').text().replace(/,/g, '.')*1,
